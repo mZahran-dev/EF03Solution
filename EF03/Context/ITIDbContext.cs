@@ -24,14 +24,13 @@ namespace EF03.Context
 
             modelBuilder.Entity<Instructor>()
                         .HasOne(I => I.Department)
-                        .WithMany(D => D.Instructors)
-                        .HasForeignKey("DeptID");
+                        .WithMany(D => D.Instructors);
+
 
             modelBuilder.Entity<Department>()
                         .HasOne(D => D.HeadInstructor)
-                        .WithOne()
-                        .HasForeignKey("InsID");                
-
+                        .WithOne();
+                        
         }
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
