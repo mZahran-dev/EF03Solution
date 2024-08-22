@@ -11,6 +11,11 @@ namespace EFC01.ITI_DB_Schema
         public int ID { get; set; }
         public string Name { get; set; }
         public DateTime HiringDate { get; set; }
+
+        //Navigation Property To Studnent Table
+        public ICollection<Student> Students { get; set; } = new HashSet<Student>();
+        
+        
         
     }
 }
