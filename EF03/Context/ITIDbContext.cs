@@ -22,15 +22,19 @@ namespace EF03.Context
             modelBuilder.Entity<Student_Course>()
                         .HasKey(SC => new {SC.StudentId, SC.CourseId });
 
-            modelBuilder.Entity<Instructor>()
-                        .HasOne(I => I.Department)
-                        .WithMany(D => D.Instructors);
+            //modelBuilder.Entity<Instructor>()
+            //            .HasOne(I => I.Department)
+            //            .WithMany(D => D.Instructors)
+            //            .HasForeignKey(I => I.Dept_ID)
+            //            .OnDelete(DeleteBehavior.SetNull);
 
 
-            modelBuilder.Entity<Department>()
-                        .HasOne(D => D.HeadInstructor)
-                        .WithOne();
-                        
+            //modelBuilder.Entity<Department>()
+            //            .HasOne(D => D.HeadInstructor)
+            //            .WithOne()
+            //            .HasForeignKey<Department>(D=> D.InsID)
+            //            .OnDelete(DeleteBehavior.SetNull);
+
         }
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }

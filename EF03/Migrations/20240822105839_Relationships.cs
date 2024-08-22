@@ -33,18 +33,11 @@ namespace EF03.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HiringDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    InsID = table.Column<int>(type: "int", nullable: false)
+                    HiringDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Departments", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Departments_Departments_InsID",
-                        column: x => x.InsID,
-                        principalTable: "Departments",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -77,7 +70,7 @@ namespace EF03.Migrations
                     Salary = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     HourRate = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    DepartmentID = table.Column<int>(type: "int", nullable: false)
+                    DepartmentID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -86,8 +79,7 @@ namespace EF03.Migrations
                         name: "FK_Instructors_Departments_DepartmentID",
                         column: x => x.DepartmentID,
                         principalTable: "Departments",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateTable(
@@ -118,8 +110,7 @@ namespace EF03.Migrations
                 {
                     InstructorId = table.Column<int>(type: "int", nullable: false),
                     CourseId = table.Column<int>(type: "int", nullable: false),
-                    Evaluate = table.Column<double>(type: "float", nullable: false),
-                    DeptID = table.Column<int>(type: "int", nullable: false)
+                    Evaluate = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -131,8 +122,8 @@ namespace EF03.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_course_Insts_Instructors_DeptID",
-                        column: x => x.DeptID,
+                        name: "FK_course_Insts_Instructors_InstructorId",
+                        column: x => x.InstructorId,
                         principalTable: "Instructors",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
@@ -164,15 +155,9 @@ namespace EF03.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_course_Insts_DeptID",
+                name: "IX_course_Insts_InstructorId",
                 table: "course_Insts",
-                column: "DeptID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Departments_InsID",
-                table: "Departments",
-                column: "InsID",
-                unique: true);
+                column: "InstructorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Instructors_DepartmentID",

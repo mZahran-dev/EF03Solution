@@ -16,7 +16,5 @@ namespace EFC01.ITI_DB_Schema
         //Navigation Property To Studnent Table
         public ICollection<Student> Students { get; set; } = new HashSet<Student>();
         public ICollection<Instructor> Instructors { get; set; }  = new HashSet<Instructor>();
-        [ForeignKey("InsID")]
-        public Department HeadInstructor { get; set; }
     }
 }

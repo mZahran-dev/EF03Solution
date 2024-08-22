@@ -16,10 +16,8 @@ namespace EFC01.ITI_DB_Schema
         public decimal Salary { get; set; }
         public string Address { get; set; }
         public decimal HourRate { get; set; }
-        [ForeignKey("DeptID")]
         public ICollection<Course_Inst> InstCourses { get; set; } = new HashSet<Course_Inst>();
 
-        public Department Department { get; set; }
         
     }
 }

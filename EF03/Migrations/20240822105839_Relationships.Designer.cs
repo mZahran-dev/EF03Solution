@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EF03.Migrations
 {
     [DbContext(typeof(ITIDbContext))]
-    [Migration("20240822104159_Relationships")]
+    [Migration("20240822105839_Relationships")]
     partial class Relationships
     {
         /// <inheritdoc />
@@ -57,15 +57,12 @@ namespace EF03.Migrations
                     b.Property<int>("InstructorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DeptID")
-                        .HasColumnType("int");
-
                     b.Property<double>("Evaluate")
                         .HasColumnType("float");
 
                     b.HasKey("CourseId", "InstructorId");
 
-                    b.HasIndex("DeptID");
+                    b.HasIndex("InstructorId");
 
                     b.ToTable("course_Insts");
                 });
@@ -81,17 +78,11 @@ namespace EF03.Migrations
                     b.Property<DateTime>("HiringDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("InsID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("InsID")
-                        .IsUnique();
 
                     b.ToTable("Departments");
                 });
@@ -111,7 +102,7 @@ namespace EF03.Migrations
                     b.Property<decimal>("Bouns")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("DepartmentID")
+                    b.Property<int?>("DepartmentID")
                         .HasColumnType("int");
 
                     b.Property<decimal>("HourRate")
@@ -213,7 +204,7 @@ namespace EF03.Migrations
 
                     b.HasOne("EFC01.ITI_DB_Schema.Instructor", "Instructor")
                         .WithMany("InstCourses")
-                        .HasForeignKey("DeptID")
+                        .HasForeignKey("InstructorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -222,26 +213,11 @@ namespace EF03.Migrations
                     b.Navigation("Instructor");
                 });
 
-            modelBuilder.Entity("EFC01.ITI_DB_Schema.Department", b =>
-                {
-                    b.HasOne("EFC01.ITI_DB_Schema.Department", "HeadInstructor")
-                        .WithOne()
-                        .HasForeignKey("EFC01.ITI_DB_Schema.Department", "InsID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("HeadInstructor");
-                });
-
             modelBuilder.Entity("EFC01.ITI_DB_Schema.Instructor", b =>
                 {
-                    b.HasOne("EFC01.ITI_DB_Schema.Department", "Department")
+                    b.HasOne("EFC01.ITI_DB_Schema.Department", null)
                         .WithMany("Instructors")
-                        .HasForeignKey("DepartmentID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Department");
+                        .HasForeignKey("DepartmentID");
                 });
 
             modelBuilder.Entity("EFC01.ITI_DB_Schema.Student", b =>
