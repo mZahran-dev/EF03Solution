@@ -10,7 +10,10 @@ namespace EFC01.ITI_DB_Schema
 {
     internal class Student_Course
     {
-        public int StudentId { get; set; }     
+        [Key ,Column(Order = 0)]
+        public int StudentId { get; set; }
+
+        [Key ,Column(Order = 1)]
         public int CourseId { get; set; }
         public double Grade { get; set; }
     }
