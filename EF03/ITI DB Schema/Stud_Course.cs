@@ -16,5 +16,9 @@ namespace EFC01.ITI_DB_Schema
         [Key ,Column(Order = 1)]
         public int CourseId { get; set; }
         public double Grade { get; set; }
+
+        //Navigation Property
+        public Student Student { get; set; }
+        public Course Course { get; set; }
     }
 }

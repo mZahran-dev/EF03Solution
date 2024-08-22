@@ -14,5 +14,7 @@ namespace EFC01.ITI_DB_Schema
         public decimal Salary { get; set; }
         public string Address { get; set; }
         public decimal HourRate { get; set; }
+
+        public ICollection<Course_Inst> InstCourses { get; set; } = new HashSet<Course_Inst>();
     }
 }
