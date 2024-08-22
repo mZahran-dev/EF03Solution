@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,8 +15,11 @@ namespace EFC01.ITI_DB_Schema
 
         //Navigation Property To Studnent Table
         public ICollection<Student> Students { get; set; } = new HashSet<Student>();
-        
-        
-        
+
+        [InverseProperty("DeptID")]
+        public ICollection<Instructor> Instructors { get; set; }  = new HashSet<Instructor>();
+
+        [InverseProperty("Department")]
+        public Instructor Instructor { get; set; }
     }
 }
