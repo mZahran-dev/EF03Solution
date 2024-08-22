@@ -18,10 +18,7 @@ namespace EFC01.ITI_DB_Schema
         public decimal HourRate { get; set; }
         public ICollection<Course_Inst> InstCourses { get; set; } = new HashSet<Course_Inst>();
 
-        [ForeignKey("Dept_ID")]
-        public Department DeptID { get; set; }
-
-        [InverseProperty("Instructor")]
         public Department Department { get; set; }
+        
     }
 }
