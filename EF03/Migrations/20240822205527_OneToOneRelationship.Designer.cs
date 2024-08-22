@@ -4,6 +4,7 @@ using EF03.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EF03.Migrations
 {
     [DbContext(typeof(ITIDbContext))]
-    partial class ITIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240822205527_OneToOneRelationship")]
+    partial class OneToOneRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,7 +108,7 @@ namespace EF03.Migrations
                     b.Property<decimal>("Bouns")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("DeptID")
+                    b.Property<int?>("DepartmentID")
                         .HasColumnType("int");
 
                     b.Property<decimal>("HourRate")
@@ -120,7 +123,7 @@ namespace EF03.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("DeptID");
+                    b.HasIndex("DepartmentID");
 
                     b.ToTable("Instructors");
                 });
@@ -229,13 +232,9 @@ namespace EF03.Migrations
 
             modelBuilder.Entity("EFC01.ITI_DB_Schema.Instructor", b =>
                 {
-                    b.HasOne("EFC01.ITI_DB_Schema.Department", "Dept")
+                    b.HasOne("EFC01.ITI_DB_Schema.Department", null)
                         .WithMany("Instructors")
-                        .HasForeignKey("DeptID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Dept");
+                        .HasForeignKey("DepartmentID");
                 });
 
             modelBuilder.Entity("EFC01.ITI_DB_Schema.Student", b =>
