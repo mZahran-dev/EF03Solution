@@ -14,5 +14,9 @@ namespace EFC01.ITI_DB_Schema
         public int CourseId { get; set; }
         public double Evaluate { get; set; }
 
+        //Navigation Property
+        public Instructor Instructor { get; set; }
+        public Course Course { get; set; }
+
     }
 }

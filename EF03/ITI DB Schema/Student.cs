@@ -13,5 +13,6 @@ namespace EFC01.ITI_DB_Schema
         public string? LName { get; set; }
         public string Address { get; set; }
         public int? Age { get; set; }
+        public ICollection<Student_Course> student_Courses { get; set; } = new HashSet<Student_Course>();
     }
 }

@@ -12,5 +12,11 @@ namespace EFC01.ITI_DB_Schema
         public int Duration { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        
+        public ICollection<Student_Course> CourseStudent { get; set; } = new HashSet<Student_Course>();
+        
+        public ICollection<Topic> topic_Courses { get; set; } = new HashSet<Topic>();
+        
+        public ICollection<Course_Inst> course_Insts = new HashSet<Course_Inst>();
     }
 }
